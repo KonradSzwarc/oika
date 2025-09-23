@@ -1,0 +1,33 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+node_modules
+
+# testing
+coverage
+
+# tanstack
+.nitro
+.tanstack
+.vinxi
+
+# build
+dist
+dist-ssr
+.output
+
+# misc
+.DS_Store
+
+# debug
+.pnpm-debug.log*
+
+# local files
+*.local
+
+# typescript
+*.tsbuildinfo
+
+# storybook
+*storybook.log
+storybook-static
