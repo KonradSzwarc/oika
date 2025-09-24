@@ -1,56 +1,54 @@
 {
-	// Automatic code formatting
-	"editor.codeActionsOnSave": {
-		"source.fixAll.biome": "explicit",
-		"source.organizeImports.biome": "explicit"
-	},
-	"editor.defaultFormatter": "biomejs.biome",
-	"editor.formatOnSave": true,
+  // Automatic code formatting
+  "editor.codeActionsOnSave": {
+    "source.fixAll.biome": "explicit",
+    "source.organizeImports.biome": "explicit"
+  },
+  "editor.defaultFormatter": "biomejs.biome",
+  "editor.formatOnSave": true,
 
-	"[tailwindcss]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	},
+  "[tailwindcss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
 
-	// TypeScript
-	"typescript.enablePromptUseWorkspaceTsdk": true,
-	"typescript.inlayHints.parameterNames.enabled": "literals",
-	"typescript.tsdk": "node_modules/typescript/lib",
-	"typescript.workspaceSymbols.scope": "currentProject",
+  // TypeScript
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "typescript.inlayHints.parameterNames.enabled": "literals",
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.workspaceSymbols.scope": "currentProject",
 
-	// Tailwind CSS
-	"files.associations": {
-		"*.css": "tailwindcss"
-	},
-	"tailwindCSS.experimental.classRegex": [
-		[
-			"cn\\(([^)]*(\\([^)]*\\))*[^)]*)\\)(?=[\\s]*[};,])",
-			"[\"'`]([^\"'`]*).*?[\"'`]"
-		], // Capture all strings between cn( and )
-		["classes={{([^;]*)}}", "[\"'`]([^\"'`]*).*?[\"'`]"], // Capture all strings within classes={ and }
-		["@tw\\s\\*\\\/([^;]*)", "[\"'`]([^\"'`]*).*?[\"'`]"] // Capture all strings between @tw */ and the first semicolon
-	],
-	"tailwindCSS.experimental.configFile": "src/services/styles/globals.css",
+  // Tailwind CSS
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "tailwindCSS.experimental.classRegex": [
+    ["cn\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"], // Capture all strings between cn( and )
+    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"], // Capture all strings within cva( and )
+    ["classes={{([^;]*)}}", "[\"'`]([^\"'`]*).*?[\"'`]"], // Capture all strings within classes={ and }
+    ["@tw\\s\\*\\\/([^;]*)", "[\"'`]([^\"'`]*).*?[\"'`]"] // Capture all strings between @tw */ and the first semicolon
+  ],
+  "tailwindCSS.experimental.configFile": "src/services/styles/globals.css",
 
-	// File nesting
-	"explorer.fileNesting.enabled": true,
-	"explorer.fileNesting.expand": false,
-	"explorer.fileNesting.patterns": {
-		"next.config.*": "*.env, .env.*, .envrc, components.json, next-env.d.ts, postcss.config.*, tsconfig.*, vitest.*",
-		"package.json": ".editorconfig, .node-version, .npmrc, .nvmrc, biome.json*, pnpm*, prettier*",
-		"README*": "LICENSE*",
-		"*.md": "$(capture).*",
-		"*.ts": "$(capture).tsx, $(capture).*.ts, $(capture)-*.ts, $(capture).*.tsx, $(capture)-*.tsx",
-		"*.tsx": "$(capture).ts, $(capture).*.tsx, $(capture)-*.tsx, $(capture).*.ts, $(capture)-*.ts, $(capture).css, $(capture).module.css"
-	},
+  // File nesting
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.expand": false,
+  "explorer.fileNesting.patterns": {
+    "next.config.*": "*.env, .env.*, .envrc, components.json, next-env.d.ts, postcss.config.*, tsconfig.*, vitest.*",
+    "package.json": ".editorconfig, .node-version, .npmrc, .nvmrc, biome.json*, pnpm*, prettier*",
+    "README*": "LICENSE*",
+    "*.md": "$(capture).*",
+    "*.ts": "$(capture).tsx, $(capture).*.ts, $(capture)-*.ts, $(capture).*.tsx, $(capture)-*.tsx",
+    "*.tsx": "$(capture).ts, $(capture).*.tsx, $(capture)-*.tsx, $(capture).*.ts, $(capture)-*.ts, $(capture).css, $(capture).module.css"
+  },
 
-	// Ignored files
-	"files.watcherExclude": {
-		"**/routeTree.gen.ts": true
-	},
-	"search.exclude": {
-		"**/routeTree.gen.ts": true
-	},
-	"files.readonlyInclude": {
-		"**/routeTree.gen.ts": true
-	}
+  // Ignored files
+  "files.watcherExclude": {
+    "**/routeTree.gen.ts": true
+  },
+  "search.exclude": {
+    "**/routeTree.gen.ts": true
+  },
+  "files.readonlyInclude": {
+    "**/routeTree.gen.ts": true
+  }
 }
