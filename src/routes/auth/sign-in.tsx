@@ -1,49 +1,55 @@
 import { revalidateLogic } from '@tanstack/react-form';
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute, Link } from '@tanstack/react-router';
 import z from 'zod';
 import { Button } from '@/common/components/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/common/components/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/common/components/card';
+import { Email } from '@/common/models/email';
+import { createModel } from '@/common/utils/models';
 import { useSignIn } from '@/services/auth/hooks';
+import { Password } from '@/services/auth/models';
 import { Form, FormControl, FormItem, FormLabel, FormMessage, InputField, useAppForm } from '@/services/forms';
 
 export const Route = createFileRoute('/auth/sign-in')({
   component: SignInPage,
 });
 
-const signInSchema = z.object({
-  email: z.email(),
-  password: z.string(),
-});
+const SignInFormValues = createModel(
+  z.object({
+    email: Email.schema,
+    password: Password.schema,
+  }),
+);
 
 function SignInPage() {
   const signIn = useSignIn();
   const form = useAppForm({
     validationLogic: revalidateLogic(),
     validators: {
-      onDynamic: signInSchema,
+      onDynamic: SignInFormValues.schema,
     },
     defaultValues: {
       email: '',
       password: '',
     },
-    onSubmit: ({ value }) => signIn(value),
+    onSubmit: ({ value }) => signIn(SignInFormValues.cast(value)),
   });
 
   return (
-    <main className="flex min-h-dvh flex-col justify-center">
-      <Card className="mx-auto min-w-xs max-w-md">
-        <CardHeader>
-          <CardTitle>Sign In</CardTitle>
+    <div className="grid w-sm max-w-full gap-4">
+      <Card>
+        <CardHeader className="text-center">
+          <CardTitle className="text-xl">Welcome back in Oika!</CardTitle>
+          <CardDescription>Sign in to continue your journey</CardDescription>
         </CardHeader>
         <CardContent>
           <form.AppForm>
-            <Form className="flex flex-col gap-4">
+            <Form className="flex flex-col gap-6">
               <form.AppField name="email">
                 {() => (
                   <FormItem>
                     <FormLabel>Email</FormLabel>
                     <FormControl>
-                      <InputField autoComplete="email" />
+                      <InputField inputMode="email" autoComplete="email" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -62,15 +68,29 @@ function SignInPage() {
               </form.AppField>
               <form.Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
                 {([canSubmit, isSubmitting]) => (
-                  <Button type="submit" disabled={!canSubmit || isSubmitting}>
+                  <Button type="submit" className="mt-2" disabled={!canSubmit || isSubmitting}>
                     {isSubmitting ? 'Signing in...' : 'Sign in'}
                   </Button>
                 )}
               </form.Subscribe>
             </Form>
           </form.AppForm>
+          <div className="mt-6 grid gap-4">
+            <div className="text-center text-sm">
+              Forgot your password?{' '}
+              <Link to="/auth/forgot-password" className="underline underline-offset-4">
+                Create a new one
+              </Link>
+            </div>
+          </div>
         </CardContent>
       </Card>
-    </main>
+      <div className="text-center text-sm">
+        Don&apos;t have an account?{' '}
+        <Link to="/auth/sign-up" className="underline underline-offset-4">
+          Sign up
+        </Link>
+      </div>
+    </div>
   );
 }

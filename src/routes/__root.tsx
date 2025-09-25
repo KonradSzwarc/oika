@@ -6,6 +6,7 @@ import { ReactQueryDevtoolsPanel } from '@tanstack/react-query-devtools';
 import { createRootRouteWithContext, HeadContent, Outlet, Scripts } from '@tanstack/react-router';
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools';
 import type { ReactNode } from 'react';
+import { Toaster } from '@/common/components/sonner';
 import appCss from '../services/styles/global.css?url';
 
 interface MyRouterContext {
@@ -40,6 +41,7 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
       </head>
       <body>
         {children}
+        <Toaster />
         <TanStackDevtools
           plugins={[
             {

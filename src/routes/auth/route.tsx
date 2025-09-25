@@ -18,5 +18,13 @@ function AuthLayout() {
     return <Navigate to="/app" />;
   }
 
-  return <Outlet />;
+  return (
+    <main className="flex h-dvh w-full flex-col items-center justify-center">
+      <div className="max-h-full max-w-full px-5">
+        <div className="h-5" />
+        <Outlet />
+        <div className="h-5" />
+      </div>
+    </main>
+  );
 }

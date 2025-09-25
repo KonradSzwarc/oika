@@ -15,7 +15,7 @@ function RouteComponent() {
   return (
     <div>
       <h1>Hello {currentUser?.name}</h1>
-      <Button onClick={signOut}>Sign Out</Button>
+      <Button onClick={() => signOut()}>Sign Out</Button>
     </div>
   );
 }
