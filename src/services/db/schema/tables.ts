@@ -1,7 +1,10 @@
-import { boolean, pgTable, text, timestamp } from 'drizzle-orm/pg-core';
+import { sql } from 'drizzle-orm';
+import type { ReferenceConfig } from 'drizzle-orm/pg-core';
+import { boolean, pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core';
+import type { Uuid } from '@/common/models/uuid';
 
 export const users = pgTable('users', {
-  id: text().primaryKey(),
+  id: primaryKeyUuid(),
   name: text().notNull(),
   email: text().notNull().unique(),
   emailVerified: boolean().default(false).notNull(),
@@ -10,10 +13,8 @@ export const users = pgTable('users', {
 });
 
 export const sessions = pgTable('sessions', {
-  id: text().primaryKey(),
-  userId: text()
-    .notNull()
-    .references(() => users.id, { onDelete: 'cascade' }),
+  id: primaryKeyUuid(),
+  userId: uuidRef(() => users.id).notNull(),
   expiresAt: timestamp().notNull(),
   token: text().notNull().unique(),
   ipAddress: text(),
@@ -22,10 +23,8 @@ export const sessions = pgTable('sessions', {
 });
 
 export const accounts = pgTable('accounts', {
-  id: text('id').primaryKey(),
-  userId: text()
-    .notNull()
-    .references(() => users.id, { onDelete: 'cascade' }),
+  id: primaryKeyUuid(),
+  userId: uuidRef(() => users.id).notNull(),
   accountId: text().notNull(),
   providerId: text().notNull(),
   accessToken: text(),
@@ -39,12 +38,22 @@ export const accounts = pgTable('accounts', {
 });
 
 export const verifications = pgTable('verifications', {
-  id: text().primaryKey(),
+  id: primaryKeyUuid(),
   identifier: text().notNull(),
   value: text().notNull(),
   expiresAt: timestamp().notNull(),
   ...timestamps(),
 });
+
+function primaryKeyUuid() {
+  return uuid().primaryKey().default(sql`uuidv7()`).$type<Uuid>();
+}
+
+function uuidRef(ref: ReferenceConfig['ref'], actions?: ReferenceConfig['actions']) {
+  return uuid()
+    .references(ref, { onDelete: 'cascade', ...actions })
+    .$type<Uuid>();
+}
 
 function timestamps() {
   return {

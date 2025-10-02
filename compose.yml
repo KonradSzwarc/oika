@@ -3,7 +3,7 @@ name: 'oika'
 services:
   postgres:
     container_name: 'oika-postgres'
-    image: 'postgres:17'
+    image: 'postgres:18'
     restart: 'always'
     environment:
       POSTGRES_PASSWORD: 'password'
