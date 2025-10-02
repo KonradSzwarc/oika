@@ -15,7 +15,7 @@ function RouteComponent() {
   const { data: currentUser } = useSuspenseQuery(currentUserQueryOptions());
 
   if (!currentUser) {
-    return <Navigate to="/auth/sign-in" />;
+    return <Navigate to="/auth" />;
   }
 
   return <Outlet />;

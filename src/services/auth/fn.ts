@@ -39,7 +39,7 @@ export const assertIsAuthenticated = createServerFn().handler(async () => {
   const session = await auth.api.getSession({ headers: getRequestHeaders() });
 
   if (!session) {
-    throw redirect({ to: '/auth/sign-in' });
+    throw redirect({ to: '/auth' });
   }
 
   return {
@@ -50,4 +50,14 @@ export const assertIsAuthenticated = createServerFn().handler(async () => {
       image: session.user.image,
     },
   };
+});
+
+export const sessionBasedRedirect = createServerFn().handler(async () => {
+  const session = await auth.api.getSession({ headers: getRequestHeaders() });
+
+  if (session) {
+    throw redirect({ to: '/app' });
+  }
+
+  throw redirect({ to: '/auth/sign-in' });
 });

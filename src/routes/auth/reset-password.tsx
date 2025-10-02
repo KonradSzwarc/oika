@@ -53,7 +53,7 @@ function ResetPasswordPage() {
 
     setTimeout(() => {
       toast.error('Some error occurred when resetting your password. Try again later.');
-      navigate({ to: '/auth/sign-in' });
+      navigate({ to: '/auth' });
     });
   }, [hasInvalidState, navigate]);
 
