@@ -7,6 +7,7 @@ import { createRootRouteWithContext, HeadContent, Outlet, Scripts } from '@tanst
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools';
 import type { ReactNode } from 'react';
 import { Toaster } from '@/common/components/sonner';
+import { assertHasPasswordCookie } from '@/services/password-cookie/fn';
 import appCss from '../services/styles/global.css?url';
 
 interface MyRouterContext {
@@ -14,6 +15,7 @@ interface MyRouterContext {
 }
 
 export const Route = createRootRouteWithContext<MyRouterContext>()({
+  beforeLoad: () => assertHasPasswordCookie(),
   head: () => ({
     meta: [
       { charSet: 'utf-8' },

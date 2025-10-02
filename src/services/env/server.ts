@@ -10,7 +10,7 @@ export const serverEnv = createEnv({
     NODE_ENV: z.enum(['development', 'production', 'test']),
   },
   server: {
-    VITE_APP_ENV: z.enum(['local', 'staging', 'production']),
+    VITE_APP_ENV: z.enum(['local', 'production']),
     VITE_SITE_URL: z.url(),
 
     TZ: z.literal('Etc/UTC'),
@@ -20,6 +20,7 @@ export const serverEnv = createEnv({
     BETTER_AUTH_DEBUG: z.stringbool().default(false),
     EMAIL_SERVER_URL: z.url(),
     EMAIL_FROM: z.email(),
+    PASSWORD_COOKIE_VALUE: z.string(),
   },
   runtimeEnv: process.env,
 });

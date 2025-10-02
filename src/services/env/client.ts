@@ -8,7 +8,7 @@ export const clientEnv = createEnv({
     NODE_ENV: z.enum(['development', 'production', 'test']),
   },
   client: {
-    VITE_APP_ENV: z.enum(['local', 'staging', 'production']),
+    VITE_APP_ENV: z.enum(['local', 'production']),
     VITE_SITE_URL: z.url(),
   },
   runtimeEnv: {
