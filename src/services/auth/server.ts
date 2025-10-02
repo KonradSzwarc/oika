@@ -3,6 +3,7 @@ import { betterAuth } from 'better-auth';
 import { drizzleAdapter } from 'better-auth/adapters/drizzle';
 import { reactStartCookies } from 'better-auth/react-start';
 import { Email } from '@/common/models/email';
+import { Seconds } from '@/common/models/seconds';
 import { db } from '@/services/db';
 import { sendEmail } from '@/services/email';
 import { serverEnv } from '@/services/env/server';
@@ -37,6 +38,12 @@ export const auth = betterAuth({
         template: 'EmailConfirmation',
         props: { url },
       });
+    },
+  },
+  session: {
+    cookieCache: {
+      enabled: true,
+      maxAge: Seconds.fromString('5 min'),
     },
   },
   databaseHooks: {
