@@ -14,7 +14,7 @@ type Options = { to: EmailAddress | EmailAddress[] } & {
 }[TemplateName];
 
 const transporter = createTransport(serverEnv.EMAIL_SERVER_URL, {
-  from: 'noreply-oika@example.com',
+  from: serverEnv.EMAIL_FROM,
   secure: serverEnv.VITE_APP_ENV !== 'local',
 });
 

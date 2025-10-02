@@ -19,6 +19,7 @@ export const serverEnv = createEnv({
     BETTER_AUTH_SECRET: z.string(),
     BETTER_AUTH_DEBUG: z.stringbool().default(false),
     EMAIL_SERVER_URL: z.url(),
+    EMAIL_FROM: z.email(),
   },
   runtimeEnv: process.env,
 });

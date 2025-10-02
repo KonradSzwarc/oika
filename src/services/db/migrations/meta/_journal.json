@@ -1,0 +1,13 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1759427059255,
+      "tag": "1759427059_rare_prima",
+      "breakpoints": true
+    }
+  ]
+}
